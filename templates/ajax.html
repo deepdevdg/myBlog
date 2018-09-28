@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type='text' id='na'></input>
+<input type='button' value='提交执行ajax请求' onclick='DoAjax()'></input>
+<script src='/static/jquery-3.3.1.js'></script>
+<script type='text/javascript'>
+	function DoAjax(){
+			var temp=$('#na').val()
+			$.ajax({
+				url:'/ajax/',           //url相当于 form 中的 action
+				type:'POST',            //type相当于form 中的 method
+				data:{dat:temp},       // data：传人的数据 dat为任意设置的内容，相当于模版中的{author:lee}
+				success:function(arg){     //成功执行  console.log() 函数 arg 为HttpResponse 返回的值
+					//var obj=jQuery.parseJSON(arg)
+					//console.log(arg)              //json.dumps(data) 序列化后的数据
+					console.log(arg.msg)
+                    console.log(arg.status)
+                    console.log(arg.data)
+					/*
+					console.log(obj)
+					console.log(obj.status)       //取json.dumps(data)字典的值status
+					console.log(obj.msg)
+					console.log(obj.data)*/
+					console.log('request.POST 提交成功')
+				},
+				error:function(){            //失败
+					console.log('失败')
+				}
+			});
+		}
+</script>
+
+<h1>主机列表</h1>
+<table border="1">
+    <thead id="thead"></thead>
+    <tbody id="tbody"></tbody>
+</table>
+
+<script src="/static/jquery-3.3.1.js"></script>
+<script>
+    $(function () {
+        init();  // 当页面加载完成，执行init()初始化方法。具体的方法写在下面
+    });
+
+    function init() {
+       alert('初始化')
+    }
+</script>
+</body>
+</html>

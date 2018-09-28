@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>API测试</title>
+</head>
+<body>
+
+<form action="" method="POST">{% csrf_token %}
+    <!--#文本框按json格式输出{ "name": "gmtest1" }便可插入一条记录-->
+    <textarea name="data" id="" cols="30" rows="10" ></textarea>
+    <input type="submit">
+</form>
+
+{{ serializer_obj }}
+
+</body>
+</html>

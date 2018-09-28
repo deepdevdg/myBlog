@@ -1,0 +1,119 @@
+{#{% extends 'base.html' %}#}
+{#{% block title %}主页{% endblock %}#}
+{#{% block content %}#}
+{#    <h1>欢迎回来！</h1>#}
+{#{% endblock %}#}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test!</title>
+</head>
+<body>
+<h1 style="background-color: antiquewhite;color: black">Hello {{ words }}</h1>
+<h1>用户输入：</h1>
+<form action="/index/" method="post">
+    {% csrf_token %}
+    用户名：<input type="text" name="username"/><br/>
+    密码：<input type="password" name="password"/><br/>
+    <input type="submit" value="提交"/>
+</form>
+
+    <h1>用户展示：</h1>
+        <table border="1">
+            <thead>
+                <tr>用户名</tr>
+                <tr>密码</tr>
+            </thead>
+            <tbody>
+                {% for item in user_list %}
+                <tr>
+                    <td>{{ item.user }}</td>
+                    <td>{{ item.pwd }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+<table>
+    <tbody>
+    {% for article in articles %}
+        <tr>
+            <td>{{ articles.title }}</td>
+        </tr>
+    {% endfor %}</tbody>
+</table>
+<ul>
+    {% for article in articles %}
+        <li>{{ article.title }} - {{ article.url }}</li>
+    {% endfor %}
+</ul>
+<ul>
+    {% for article in articles %}
+        <li>{{ article.url }} - {{ article.title }}</li>
+    {% endfor %}
+</ul>
+<table border="2">
+    <thead>
+    <tr>
+        <th>title</th>
+        <th>url</th>
+        <th>updatetime</th>
+        <th>createdate</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for article in articles %}
+        <tr>
+            <td>{{ article.title }}</td>
+            <td>{{ article.url }}</td>
+            <td>{{ article.update_time }}</td>
+            <td>{{ article.create_date }}</td>
+        </tr>
+    {% endfor %}</tbody>
+</table>
+<div>{{ data }}</div>
+{% for x in data %}
+    <p>{{ x }}</p>
+{% endfor %}
+
+<script>
+    var jsond = {{ data|safe }};
+    document.write("<h1>" + jsond + "</h1>");
+</script>
+
+<div>
+    <button type="button" id="testBotton" onclick="Ssss('{{ x }}')">测试</button>
+</div>
+<script language="JavaScript">
+    function Ssss2(id) {
+        var domain_name = id;    //获取要传到后台的数据
+        $.ajax({
+            type: "GET",
+            url: "test/",    //后台处理函数的url
+            data: domain_name,
+            success: function (result) {  //获取后台处理后传过来的result
+                alert(result)
+            },
+        });
+    }
+</script>
+<script language="JavaScript">
+    function Ssss(id) {
+        $.ajax({
+            type: "GET",
+            url: "test/？domain_name=" + id,    //后台处理函数的url和数据
+            success: function (result) {  //获取后台处理后传过来的result
+                alert(result)
+            },
+        });
+    }
+</script>
+<SCRIPT>
+    {#var List = {{ List|safe }};#}
+    var list = {{ list|safe }};
+    document.write("<h1>" + list + "</h1>");
+    {#document.write("<h1>"+List+"</h1>");#}
+</SCRIPT>
+</body>
+</html>
